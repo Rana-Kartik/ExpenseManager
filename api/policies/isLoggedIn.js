@@ -15,7 +15,7 @@ module.exports =async function(req,res,proceed){
         else
         {
             const decoded = jwt.verify(token, 'secret')
-            console.log(decoded);
+            req.userid = decoded.userid
             proceed()
         }
     }

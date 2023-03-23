@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Transaction</title>
+    <title>Title</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -35,25 +35,26 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Transaction Page</p>
+                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Edit Transaction Page</p>
 
                                     <form class="mx-1 mx-md-4" method="post"
-                                        action="/Account/Transaction/<%= accountId %>">
+                                        action="/Account/EditTransaction/<%= data.id %>">
 
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
                                                 <label class="form-label" for="form3Example1c">Transaction Name</label>
                                                 <input type="text" id="form3Example1c" name="transactionName"
-                                                    placeholder="Enter Transaction Name" pattern="[A-Za-z' ']+"
-                                                    maxlength="30" class="form-control" required />
+                                                    value="<%= data.transactionName %>" class="form-control"
+                                                    pattern="[A-Za-z' ']+" required />
                                             </div>
                                         </div>
 
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
-                                                TransactionType: <select name="transactionType">
+                                                TransactionType: <select name="transactionType"
+                                                    value="<%= data.transactionType %>">
                                                     <option>Select Account Type</option>
                                                     <option selected>Income</option>
                                                     <option>Expense</option>
@@ -66,8 +67,8 @@
                                             <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
                                                 <label class="form-label" for="form3Example1c">Amount</label>
-                                                <input type="text" id="form3Example1c" name="transactionAmount"
-                                                    pattern="[0-9]+" placeholder="Enter Amount" class="form-control"
+                                                <input type="number" id="form3Example1c" name="transactionAmount"
+                                                    value="<%= data.transactionAmount %>" class="form-control"
                                                     maxlength="10" required />
                                             </div>
                                         </div>
@@ -77,17 +78,17 @@
                                             <div class="form-outline flex-fill mb-0">
                                                 <label class="form-label" for="form3Example1c">Description</label>
                                                 <input type="text" id="form3Example1c" name="transactionDescription"
-                                                    pattern="[A-Za-z' ']+" placeholder="Enter Description"
-                                                    class="form-control" required />
+                                                    value="<%= data.transactionDescription %>" class="form-control"
+                                                    required />
                                             </div>
                                         </div>
 
                                         <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                            <input type="submit" name="submit" value="Save"
+                                            <input type="submit" name="submit" value="UpdateTransaction"
                                                 class="btn btn-primary btn-lg">
                                         </div>
                                         <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                            <input type="reset" name="submit" value="Reset"
+                                            <input type="reset" name="submit" value="reset"
                                                 class="btn btn-primary btn-lg">
                                         </div>
                                     </form>

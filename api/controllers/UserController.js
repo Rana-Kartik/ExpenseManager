@@ -5,16 +5,14 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 
+//install the packages
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 
-var digits = '0123456789'
-let otp = ''
-for (let i = 0; i < 6; i++) {
-      otp += digits[Math.floor(Math.random() * 10)]
-}
 module.exports = {
+
+      //this fucation do the signup of new user
       signup: async function (req, res) {
             console.log(req.body);
             await User.find({ email: req.body.email })
@@ -25,6 +23,7 @@ module.exports = {
                               })
                         }
                         else {
+                              //password are bcrypt and store into the db 
                               bcrypt.hash(req.body.password, 10, async (err, hash) => {
                                     if (err) {
                                           res.status(500).json({
@@ -39,53 +38,50 @@ module.exports = {
                                           let Country = req.body.Country
                                           let ConfirmPassword = req.body.ConfirmPassword
                                           let password = hash
-                                          await User.create({ username: username, email: email, MobileNo: MobileNo, Address: Address, Country: Country, password: password, ConfirmPassword: ConfirmPassword })                           
+                                          await User.create({ username: username, email: email, MobileNo: MobileNo, Address: Address, Country: Country, password: password, ConfirmPassword: ConfirmPassword })
                                                 .fetch()
-                                                .then(result => { 
-                                                      
+                                                .then(result => {
                                                       const token = jwt.sign({
                                                             email: result.email,
-                                                            userid : result.id
+                                                            userid: result.id
                                                       }, process.env.JWT_KEY,
                                                             {
                                                                   expiresIn: "90h"
                                                             },
                                                       )
+                                                      
+                                                      //welcome mail send of user
+                                                      let mailTransporter = nodemailer.createTransport({
+                                                            service: 'gmail',
+                                                            host: 'smtp.gmail.com',
+                                                            port: 465,
+                                                            secure: true,
+                                                            auth: {
+                                                                  user: 'ranakartik461@gmail.com',
+                                                                  pass: 'aduz aypc piie kqkt'
+                                                            }
+                                                      })
 
-                                                      // let mailTransporter = nodemailer.createTransport({
-                                                      //       service: 'gmail',
-                                                      //       host: 'smtp.gmail.com',
-                                                      //       port: 465,
-                                                      //       secure: true,
-                                                      //       auth: {
-                                                      //             user: 'ranakartik461@gmail.com',
-                                                      //             pass: 'aduz aypc piie kqkt'
-                                                      //       }
-                                                      // })
+                                                      let mailDetails = {
+                                                            from: 'ranakartik461@gmail.com',
+                                                            to: email,
+                                                            subject: 'Welcome to Expense Manager',
+                                                            text: "'Welcome to expense manager here you can manage your expense and income both in good manner'"             
+                                                      };
 
-                                                      // let mailDetails = {
-                                                      //       from: 'ranakartik461@gmail.com',
-                                                      //       to: email,
-                                                      //       subject: 'Welcome to Expense Manager',
-                                                      //       text: "'Welcome to expense manager here you can manage your expense and income both in good manner'" + '<br>' +
-                                                      //             "Your Username is" + result.username +
-                                                      //             "Your Password is" + result.ConfirmPassword +
-                                                      //             "otp for" + otp
-                                                      // };
-
-                                                      // mailTransporter.sendMail(mailDetails, function (err, data) {
-                                                      //       if (err) {
-                                                      //             console.log(err);
-                                                      //       } else {
-                                                      //             console.log('Email sent successfully')
-                                                      //       }
-                                                      // })
-
+                                                      mailTransporter.sendMail(mailDetails, function (err, data) {
+                                                            if (err) {
+                                                                  console.log(err);
+                                                            } else {
+                                                                  console.log('Email sent successfully')
+                                                            }
+                                                      })
                                                       console.log("___________________");
                                                       console.log(result);
-                                                      res.redirect(`/otp/?token=${token}&userid=${result.id}`)
+                                                      res.redirect(`/Account/defaultAccount/?token=${token}&userid=${result.id}`)
                                                 })
                                                 .catch(err => {
+                                                      console.log(err);
                                                       res.status(500).json({
                                                             error: err
                                                       })
@@ -100,6 +96,8 @@ module.exports = {
                         })
                   })
       },
+
+      //this function do the login user
       loginuser: async function (req, res) {
             await User.findOne({ email: req.body.email })
                   .then(async userdata => {
@@ -124,14 +122,15 @@ module.exports = {
                               if (data) {
                                     const token = jwt.sign({
                                           email: userdata.email,
-                                          userid: userdata._id
+                                          userid: userdata.id
                                     }, process.env.JWT_KEY,
                                           {
                                                 expiresIn: "90h"
                                           },
                                     )
-                                    res.cookie('token', token, { httpOnly: true }).send()
-                                    res.redirect('/account')
+                                    res.cookie('token', token, { httpOnly: true })
+                                    console.log("passes is ", userdata.id);
+                                    res.redirect(`/userallaccount?userid=${userdata.id}`)
                               }
                               else {
                                     return res.status(500).json({
@@ -147,6 +146,7 @@ module.exports = {
                   })
       },
 
+      //logout the user
       logoutuser: async function (req, res) {
             try {
                   res.clearCookie('token').redirect('/login')
@@ -161,29 +161,5 @@ module.exports = {
                   })
             }
       },
-     
-      userverification: async function (req, res) {
-            // let otpverify = req.body.otp
-            // if (otpverify === otp) {
-                  let token = req.query.token
-                  let userid = req.query.userid
-                  console.log(userid);
-                  console.log(token);
-                  Account.create({userid : userid, AccountName : 'default', accountType : 'default'})
-                  .fetch()
-                  .then(data => {
-                        res.cookie("token",token,{httpOnly:true}).redirect('account')
-                  })
-                  .catch(err => {
-                        res.status(500).json({
-                              statusCode : 500,
-                              error : err
-                        })
-                  })
-           // }
-            // else {
-            //       console.log("invalid");
-            // }
-      }
 
 };

@@ -7,28 +7,26 @@
 
 module.exports = {
 
-  tableName : 'Transaction',
+  tableName: 'Transaction',
   attributes: {
-
-    accountid : {
-      type : 'string',
-      required : true,
+    accountid: {
+      model: 'Account'
     },
-    transactionName : {
-      type : 'string',
-      required : true
+    transactionName: {
+      type: 'string',
+      required: true
     },
-    transactionType : {
-      type : 'string',
-      required : true
+    transactionType: {
+      type: 'string',
+      required: true
     },
-    transactionAmount : {
-      type : 'number',
-      required : true
+    transactionAmount: {
+      type: 'number',
+      required: true
     },
-    transactionDescription : {
-      type : 'string',
-      required : true
+    transactionDescription: {
+      type: 'string',
+      required: true
     }
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗

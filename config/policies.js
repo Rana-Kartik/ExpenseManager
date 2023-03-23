@@ -17,9 +17,17 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
    UserController : {
-    // '*': 'isLoggedIn',
-    // 'loginuser' : true,
-    // 'logoutuser' : true,
-    // 'signup' : true
+    '*': 'isLoggedIn',
+    'loginuser' : true,
+    'logoutuser' : true,
+    'signup' : true
+   },
+
+   AccountController : {
+    '*' : 'isLoggedIn'
+   },
+
+   TransactionController : {
+    '*' : 'isLoggedIn'
    }
 };

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Title</title>
+    <title>Dashboard</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -21,23 +21,6 @@
         .order-card {
             color: #fff;
         }
-
-        .bg-c-blue {
-            background: linear-gradient(45deg, #4099ff, #73b4ff);
-        }
-
-        .bg-c-green {
-            background: linear-gradient(45deg, #2ed8b6, #59e0c5);
-        }
-
-        .bg-c-yellow {
-            background: linear-gradient(45deg, #FFB64D, #ffcb80);
-        }
-
-        .bg-c-pink {
-            background: linear-gradient(45deg, #FF5370, #ff869a);
-        }
-
 
         .card {
             border-radius: 5px;
@@ -110,11 +93,11 @@
         }
 
         .card {
-                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-                padding: 16px;
-                text-align: center;
-                background-color: #f1f1f1;
-}
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            padding: 16px;
+            text-align: center;
+            background-color: #f1f1f1;
+        }
     </style>
 </head>
 
@@ -126,22 +109,17 @@
             <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
                 <div class="position-sticky">
                     <div class="list-group list-group-flush mx-3 mt-4">
-                        <a href="#" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
-                            <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Main dashboard</span>
+                        <a href="/AddAccount" class="list-group-item list-group-item-action py-2 ripple"
+                            aria-current="true">
+                            <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>AddAccount</span>
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action py-2 ripple active">
-                            <i class="fas fa-chart-area fa-fw me-3"></i><span>Webiste traffic</span>
-                        </a>
-                        <a href="/Transaction" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
-                            <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>AddTransaction</span>
-                        </a>
-                        <a href="/logout/logoutuser" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                        <a href="/logout/logoutuser" class="list-group-item list-group-item-action py-2 ripple"
+                            aria-current="true">
                             <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Logout</span>
                         </a>
                     </div>
                 </div>
             </nav>
-            <!-- Sidebar -->
 
             <!-- Navbar -->
             <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
@@ -154,28 +132,16 @@
                         <i class="fas fa-bars"></i>
                     </button>
 
-                    <!-- Brand -->
                     <a class="navbar-brand" href="#">
                         <img src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png" height="25" alt=""
                             loading="lazy" />
                     </a>
-                    <form action="/userallaccount" method="post" class="d-none d-md-flex input-group w-auto my-auto">
-                        <input type="submit" value="getAllAccount" class="form-control rounded">
-                    </form>
-                    <!-- Search form -->
-                    <form class="d-none d-md-flex input-group w-auto my-auto">
-                        <input autocomplete="off" type="search" class="form-control rounded" placeholder='Search'
-                            style="min-width: 225px" />
-                        <span class="input-group-text border-0"><i class="fas fa-search"></i></span>
-                    </form>
+
                 </div>
                 <!-- Container wrapper -->
             </nav>
             <!-- Navbar -->
         </header>
-        <!--Main Navigation-->
-
-
     </header>
     <!--Main layout-->
     <main style="margin-top: 58px">
@@ -198,15 +164,50 @@
         crossorigin="anonymous"></script>
 
     <div class="container">
-        <div class="row">
-            <div class="column">
-              <div class="card">
-                <h3>Card 1</h3>
-               
-                <p>Some text</p>
-              </div>
-            </div>
+        <form method="post">
+
+        </form>
     </div>
+    <div class="container">
+        <h2>Account List</h2>
+        <% acc.forEach(function(tt){ %>
+            <div class="row">
+                <div class="col col-6">
+                    <div class="card">
+                        <div class="card">
+                            <div class="card-body py-0">
+                                <h4 class="card-title">
+                                    <%= tt.AccountName %>
+                                </h4>
+                            </div>
+                            <div class="card-footer">
+                                <a href="/Account/updateAccount/<%= tt.id %>">
+                                    <div class="btn btn-primary">Edit</div>
+                                </a>
+                                <a href="/Account/deleteAccount/<%= tt.id %>"  onclick="return confirm('deleted')" >
+                                    <div class="btn btn-danger">Delete</div>
+                                </a>
+                                <a href="/Account/getTransaction/<%= tt.id %>">
+                                    <div class="btn btn-primary">ShowTransaction</div>
+                                </a>
+                                <a href="/Account/getuser/<%= tt.id %>">
+                                    <div class="btn btn-success">AddUser</div>
+                                </a>
+                                <a href="/Account/viewuser/<%= tt.id %>">
+                                    <div class="btn btn-success">ViewUser</div>
+                                </a>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+    </div>
+    <script>
+        function test(){
+            
+        }
+    </script>
 </body>
 
 </html>

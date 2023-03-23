@@ -20,26 +20,40 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
+  //this all route work for get the pages
   '/': { view: 'pages/homepage' },
-  'get /signup' :{view : 'signup'},
-  'get /login' :{view : 'login'},
-  'get /otp' : {view: 'otp'},
-  'get /account' : {view : 'account'},
-  'get /dashboard' : {view: 'dashboard'},
-  'get /Transaction'  : {view : 'Transaction'},
-  'post /signup/adduser' : 'UserController.signup',
-  'post /login/loginuser' : 'UserController.loginuser',
-  'post /userverification' : 'UserController.userverification',
-  'get /logout/logoutuser' : 'UserController.logoutuser',
-  'post /userallaccount' : 'AccountController.getallaccount',
-  'post /Account/adduser' : 'AccountController.adduser',
-  'post /Account/createAccount' : 'AccountController.createAccount',
-  'post /Account/deleteAccount/:id' : 'AccountController.deleteAccount',
-  'post /Account/updateAccount/:id' : 'AccountController.updateAccount',
-  'post /Account/Transaction' : 'TransactionController.addTransaction',
-  'get /Account/getTransaction/:id' : 'TransactionController.AllTransaction',
-  'post /Account/EditTransaction/:id' : 'TransactionController.EditTransaction',
-  'post /Account/deleteTransaction/:id' : 'TransactionController.deleteTransaction'
+  'get /signup': { view: 'signup' },
+  'get /login': { view: 'login' },
+  'get /AddAccount': { view: 'AddAccount' },
+  'get /dashboard': { view: 'dashboard' },
+  'get /tr': { view: 'transactionlist' },
+
+
+  //set the user route
+  'post /signup/adduser': 'UserController.signup',
+  'post /login/loginuser': 'UserController.loginuser',
+  'get /logout/logoutuser': 'UserController.logoutuser',
+
+
+  //set the account module route
+  'get /userallaccount': 'AccountController.getallaccount',
+  'get /Account/getuser/:id': 'AccountController.getuser',
+  'post /Account/adduser/:id': 'AccountController.adduser',
+  'post /Account/createAccount': 'AccountController.createAccount',
+  'get /Account/deleteAccount/:id': 'AccountController.deleteAccount',
+  'get /Account/updateAccount/:id': 'AccountController.editAccount',
+  'post /Account/updateAccount/:id': 'AccountController.updateAccount',
+  'get /Account/defaultAccount': 'AccountController.defaultAccount',
+  'get /Account/viewuser/:id': 'AccountController.viewuser',
+
+
+  //set the transaction module route
+  'get /Transaction/:id': 'TransactionController.viewAddTransaction',
+  'post /Account/Transaction/:id': 'TransactionController.addTransaction',
+  'get /Account/getTransaction/:id': 'TransactionController.AllTransaction',
+  'get /Account/EditTransaction/:id': 'TransactionController.EditTransaction',
+  'post /Account/EditTransaction/:id': 'TransactionController.updateTransaction',
+  'get /Account/deleteTransaction/:id': 'TransactionController.deleteTransaction'
 
 
   /***************************************************************************

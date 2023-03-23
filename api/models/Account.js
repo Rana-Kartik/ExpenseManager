@@ -7,34 +7,38 @@
 
 module.exports = {
 
-  'tablename' : 'Account',
-  attributes: {
-     userid : {
-        model : 'User'
-     },
-     AccountName : {
-        type : 'string',
-     },
-   //   users : {
-   //    type : 'json',
-   //    columnType : 'array',
-   //    required : true
-   //   }
-    //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
-    //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
-    //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
+   'tablename': 'Account',
+   attributes: {
+      userid: {
+         model: 'User'
+      },
+      AccountName: {
+         type: 'string',
+      },
+      accountid: {
+         collection: 'Transaction',
+         via: 'accountid'
+      },
+      useraccountid: {
+         collection: 'User',
+         via: 'useraccountid'
+      }
+
+      //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
+      //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
+      //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
 
-    //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
-    //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
-    //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
+      //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
+      //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
+      //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
 
 
-    //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
-    //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
-    //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
+      //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
+      //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
+      //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
-  },
+   },
 
 };
 

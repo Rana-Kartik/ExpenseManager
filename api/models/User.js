@@ -7,34 +7,37 @@
 
 module.exports = {
 
-  tableName : 'user',
+  tableName: 'user',
   attributes: {
-     username : {
-       type : 'string'
-     },
-     password : {
-       type : 'string'
-     },
-     email : {
-       type : 'string',
-       unique : true
-     },
-     MobileNo : {
-      type : 'number'
-     },
-     Country : {
-      type : 'string'
-     },
-     Address : {
-      type : 'string'
-     },
-     ConfirmPassword : {
-      type : 'string'
-     },
-     userid : {
-      collection : 'Account',
-      via : 'userid'
-     }
+    username: {
+      type: 'string'
+    },
+    password: {
+      type: 'string'
+    },
+    email: {
+      type: 'string',
+      unique: true
+    },
+    MobileNo: {
+      type: 'number'
+    },
+    Country: {
+      type: 'string'
+    },
+    Address: {
+      type: 'string'
+    },
+    ConfirmPassword: {
+      type: 'string'
+    },
+    userid: {
+      collection: 'Account',
+      via: 'userid'
+    },
+    useraccountid: {
+      model: 'Account'
+    }
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝

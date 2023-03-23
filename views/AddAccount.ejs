@@ -3,6 +3,12 @@
 
 <head>
   <title>Expense Manager</title>
+  <script>
+    function test() {
+      alert('you have to cancel')
+      document.getElementById('AccountName').value = " "
+    }
+  </script>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -28,38 +34,24 @@
   <section class="vh-100">
     <div class="container py-5 h-100">
       <div class="row d-flex align-items-center justify-content-center h-100">
-        <div class="col-md-8 col-lg-7 col-xl-6">
-          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" class="img-fluid"
-            alt="Phone image">
-        </div>
+
         <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-          <form method="post" action="/login/loginuser">
+          <form method="post" action="/Account/createAccount">
             <div class="form-outline mb-4">
-              <h1 style="font-family: 'Times New Roman', Times, serif; font-style: italic;">Expense Login Page</h1>
+              <h1 style="font-family: 'Times New Roman', Times, serif; font-style: italic;">Expense Account Page</h1>
             </div>
 
             <!-- Email input -->
             <div class="form-outline mb-4">
-              <input type="email" id="form1Example13" name="email" placeholder="Enter Email"
-                class="form-control form-control-lg" required />
-              <label class="form-label" for="form1Example13">Email address</label>
+              <input type="text" id="AccountName" name="AccountName" class="form-control form-control-lg"
+                pattern="[A-Za-z' ']+" required />
+              <label class="form-label" for="form1Example13">AccountName</label>
             </div>
-
-            <!-- Password input -->
-            <div class="form-outline mb-4">
-              <input type="password" id="form1Example23" name="password" placeholder="********"
-                class="form-control form-control-lg"  minlength="8" maxlength="16" required />
-              <label class="form-label" for="form1Example23">Password</label>
-            </div>
-
 
             <!-- Submit button -->
-            <input type="submit" name="submit" value="Sign in" class="btn btn-primary btn-lg btn-block">
+            <input type="submit" name="Save" value="Save" class="btn btn-primary btn-lg btn-block">
+            <input type="button" value="Cancel" id="cancel" onclick="test()" class="btn btn-primary btn-lg btn-block">
 
-            <div class="divider d-flex align-items-center my-4">
-              <p class="text-center fw-bold mx-3 mb-0 text-muted">Don't have any account?</p>
-              <a href="/signup">Signup</a>
-            </div>
           </form>
         </div>
       </div>

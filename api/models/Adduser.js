@@ -6,14 +6,14 @@
  */
 
 module.exports = {
-  
-  tableName : 'addUser',
+
+  tableName: 'addUser',
   attributes: {
 
-    email : {
-      type : 'string',
-      required : true,
-      unique : true
+    email: {
+      type: 'string',
+      required: true,
+      unique: true
     }
 
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
